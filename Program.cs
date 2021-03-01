@@ -23,6 +23,9 @@ namespace Felhantering
             Console.WriteLine("1. Exempel 1 - Utan felhantering med metoden Parse.");
             Console.WriteLine("2. Exempel 2 - Planera för fel med metoden TryParse.");
             Console.WriteLine("3. Exempel 3 - Felhantering med undantag.");
+            Console.WriteLine("4. Övning 6 - Att planera för fel");
+            Console.WriteLine("5. Övning 1 - try/catch");
+            Console.WriteLine("6. Övning 7 - start/stopp/hopp");
 
             Console.WriteLine();
 
@@ -45,6 +48,15 @@ namespace Felhantering
                     break;
                 case "3":
                     Exempel3();
+                    break;
+                case "4":
+                    Uppdrag6();
+                    break;
+                case "5":
+                    Uppdrag1();
+                    break;
+                case "6":
+                    Uppdrag7();
                     break;
             }
 
@@ -113,7 +125,7 @@ namespace Felhantering
                 Console.Write("Ange ett heltal: ");
                 int heltal = int.Parse(Console.ReadLine());
             }
-            catch(FormatException e)
+            catch (FormatException e)
             {
                 Console.WriteLine("Format " + e.Message);
             }
@@ -129,6 +141,80 @@ namespace Felhantering
 
 
             Console.WriteLine("Programmet avslutades korrekt.");
+        }
+        static int MataInTal(string meddelande)
+        {
+            bool inmatat = false;
+            int tal = 0;
+
+            while (!inmatat)
+            {
+                Console.Write("Ange din inkomst: ");
+                inmatat = int.TryParse(Console.ReadLine(), out tal);
+                if (!inmatat)
+                    Console.WriteLine("Mata in ett heltal tack!");
+            }
+            return tal;
+        }
+        static void Uppdrag6()
+        {
+            /*
+             * Exempel 2. 
+             * Beräkning av timlön.
+             * Planera för fel med metoden TryParse.
+             */
+            int inkomst = MataInTal("Ange din inkomst: ");
+            int timmar = MataInTal("Ange dina timmar: ");
+
+            Console.WriteLine("Din timlön blev: " + (inkomst / timmar) + " kr/h.");
+
+        }
+        static void Uppdrag1()
+        {
+            //mata in och felsöka
+            try
+            {
+                Console.Write("Ange inkomst: ");
+                int inkomst = int.Parse(Console.ReadLine());
+                Console.Write("Ange antal timmar: ");
+                int timmar = int.Parse(Console.ReadLine());
+
+
+                Console.WriteLine("Din timlön blev: " + (inkomst / timmar) + " kr/h.");
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        static void Uppdrag7()
+        {
+            while(true)
+            {
+                try
+                {
+                    Console.Write("Ange start: ");
+                    int start = int.Parse(Console.ReadLine());
+                    Console.Write("Ange stop: ");
+                    int stopp = int.Parse(Console.ReadLine());
+                    Console.Write("Ange hopp: ");
+                    int hopp = int.Parse(Console.ReadLine());
+
+                    for(int i = start; i <stopp; i = i + hopp)
+                    {
+                        Console.WriteLine(i);
+                    }
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    
+                }
+            }
+
+
         }
     }
 }
